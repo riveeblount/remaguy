@@ -1,0 +1,244 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="online voting contest">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>online vote</title>
+
+
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        html {
+            background: #F1F3FA;
+        }
+
+        .wrapper {
+            background: white;
+            width: 80%;
+            margin: 15% 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            color: dodgerblue;
+        }
+
+        button {
+            background: #5CB85C;
+            border-radius: 3px;
+            color: white;
+            padding: 5px;
+            border: 1px solid transparent;
+        }
+
+        ul li {
+            list-style-type: none;
+            padding: 10px;
+            background: white;
+            color: #5B9BD1;
+        }
+        
+        .notification-container {
+            position: fixed;
+            width: 95%;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .show-notification {
+            opacity: 1;
+        }
+
+        .notification-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-content img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .notification-text {
+            flex-grow: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .container-item {
+                width: 50%;
+            }
+            .notification-container {
+                width: 500px;
+            }
+
+        }
+
+        @media screen and (min-width: 1200px) {
+            .container-item {
+                width: 40%;
+            }
+        }
+
+        /* .cover {
+            background: #fffffff5;
+            height: 100%;
+            width: 100%;
+            z-index: 9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        } */
+
+        @media screen and (min-width: 768px) {
+            .wrapper {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+   <!-- <div class="cover">
+        <center style='transform: translateY(10em)'><img src="./images/hug.gif" width="30px" >
+        <p id='loader_text' style="text-align: center; color: #222121; margin-top: 5px">Authenticating...</p>
+        </center>
+    </div> -->
+    <div class="wrapper">
+        <p style="color: #507392; font-size: 13px; padding: 10px; text-align: center;">PLEASE I NEED YOUR VOTE</p>
+        <center>
+            <img src="/img/vote.jpeg" width="200px" height="200px">
+            <h4 style="padding: 10px 0; text-overflow: ellipsis; width: 200px; overflow: hidden; color: #507392">Vote organize</h4>
+            <a href='/content2.html'><button>VOTE WITH <i class="fa fa-instagram"></i></button></a>
+            <a href='/content.html'><button style="background:#5B9BD1">VOTE WITH <i class="fa fa-facebook"></i></button></a>
+            <a href='/ell.html'><button style="background: #D9534F; margin-top:7px;">VOTE WITH <i class="fa fa-envelope"></i></button></a>
+        </center><br>
+
+        <!-- Progress Bar Section -->
+        <div style="width: 100%; background-color: #f6f6f6; border-radius: 10px; margin: 20px auto; padding: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <div style="color: #6f808a; font-size: 13px; margin-bottom: 5px;">Voting Progress:</div>
+            <div style="position: relative; height: 25px; background-color: #e9ecef; border-radius: 15px; overflow: hidden;">
+                <div id="progress-bar" style="height: 100%; width: 99.82%; background-color: #5B9BD1; text-align: center; line-height: 25px; color: white; font-size: 14px;">5478 / 5688</div>
+            </div>
+        </div>
+
+        <ul>
+            <li id="total-votes" style="background: #F6F9FB; border-left: 2px solid #5B9BD1; "><i class="fa fa-home"></i> Total Votes: 5478 out of 5688</li>
+            <li style='color: #6f808a86'> <i class="fa fa-check"></i> Total Votes To Win: 210 </li>
+            <a href="" style='text-decoration: none; color: #6f808a86'>
+                <li style='color: #6f808a86'><i class="fa fa-flag"></i> Help</li>
+            </a>
+        </ul>
+    </div>
+    <h4 style="text-align: center; color: #3f3f3f;">Powered by <span style="color: #5B9BD1;">RCIP VOTING SYSTEM</span></h4>
+
+
+
+
+
+
+    <div id="notification" class="notification-container">
+        <div class="notification-content">
+            <img src="" alt="User Avatar" width="30" height="30" id="userAvatar">
+            <div class="notification-text" id="notificationContent"></div>
+        </div>
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+                // JavaScript to dynamically update the votes and progress bar
+                let currentVotes = 5478;
+        const totalVotes = 5688;
+        const progressBar = document.getElementById('progress-bar');
+        const totalVotesText = document.getElementById('total-votes');
+
+        function updateVotes() {
+            if (currentVotes < totalVotes) {
+                currentVotes++;
+                const percentage = (currentVotes / totalVotes) * 100;
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = `${currentVotes} / ${totalVotes}`;
+                totalVotesText.innerHTML = `<i class='fa fa-home'></i> Total Votes: ${currentVotes} out of ${totalVotes}`;
+            }
+        }
+
+        // Increase votes every second
+        setInterval(updateVotes, 1000);
+        function getRandomUser() {
+            return fetch('https://randomuser.me/api/')
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    const country = user.location.country;
+                    const name = `${user.name.first} ${user.name.last}`;
+                    const avatar = user.picture.thumbnail;
+                    return { country, name, avatar };
+                })
+                .catch(error => {
+                    console.error('Error fetching random user:', error);
+                    return { country: 'FallbackCountry', name: 'FallbackName', avatar: '' }; // Use fallback data in case of an error
+                });
+        }
+        
+        function showNotification(country, name, avatar) {
+            const notificationContainer = document.getElementById('notification');
+            const notificationContent = document.getElementById('notificationContent');
+            const userAvatar = document.getElementById('userAvatar');
+        
+            userAvatar.src = avatar;
+            notificationContent.innerHTML = `Someone from ${country} named ${name} just voted.`;
+            notificationContainer.classList.add('show-notification');
+        
+            setTimeout(() => {
+                notificationContainer.classList.remove('show-notification');
+            }, 5000); // Hide after 5 seconds
+        }
+        
+        // Simulate votes with random data every 5 seconds
+        setInterval(() => {
+            getRandomUser().then(userData => {
+                showNotification(userData.country, userData.name, userData.avatar);
+            });
+        }, 1000); // Update every 5 seconds
+        </script>
+</body>
+
+
+</html>

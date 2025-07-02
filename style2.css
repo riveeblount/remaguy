@@ -1,0 +1,102 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; /* Matching the design font */
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-arrow {
+    font-size: 18px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Content styling */
+.content {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Image styling */
+.image-container {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Matches the slightly rounded corners in the image */
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.code-input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #1877f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #145db2;
+}
+
+.btn-secondary {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    color: #1877f2;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    text-decoration: underline;
+}

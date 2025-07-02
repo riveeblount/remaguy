@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>testing page..</p>
+    </div>
+
+    <script type="text/javascript">
+        const xhr= new XMLHttpRequest();
+
+        xhr.readyStateChange= function () {
+            if(xhr.readyStateChange==4){
+                if(xhr.status==200){
+                    alert("Gloria is not serious..");
+                }
+            }
+            if(xhr.status==404){
+                console.log("not sure Gloria will ever be sensitive again..")
+            }
+        }
+
+        xhr.open('get', 'cont.txt', true );
+        xhr.send();
+
+
+    </script>
+</body>
+</html>
